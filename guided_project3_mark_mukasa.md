@@ -415,7 +415,7 @@ print(autos.head(2))
 This dataset is composed of a dataframe with 20 columns and 50000 rows of data. 
 Most of the columns donot have null values, save for the notRepairedDamage, fuelType, model, gearbox, and vehicleType columns. 
 5 columns are of integer datatype, and 15 are of object datatypes.
-The colun names are of camelcase.
+The column names are of camelcase.
 
 
 ```python
@@ -434,7 +434,7 @@ autos.columns
 
 
 
-First, we shall change the column names from the camelcase to snakecase format. This is because the snakecase format is easier to work with and preferred in python.Other changes shall be made to colmns to shortening purposes.
+First, we shall change the column names from the camelcase to snakecase format. This is because the snakecase format is easier to work with and preferred in python. Other changes shall be made to columns to shortening purposes.
 
 
 ```python
@@ -1015,7 +1015,7 @@ autos.shape
 
 
 
-After inspection of the price column I noticed there was some outliers required to be removed. Using the value_counts() method i observed the sudden jump from the 350000 price to the next value, 999990. I considered the values after the 350000 value to be outliers and removed rows that contained those values.
+After inspection of the price column, I noticed there were some outliers required to be removed. Using the value_counts() method i observed the sudden jump from the 350000 price to the next value, 999999. I considered the values after the 350000 value to be outliers and removed rows that contained those values.
 
 We are left with a dataframe with 48565 rows, indicating that we eliminated 1435 rows.
 
@@ -1473,6 +1473,7 @@ autos['registration_year'].describe()
 From exploration of the registration_year column, there are some observations of note;
 - The earliest year is 1000
 - The latest year is 9999
+This is definitely out of order. We would have to eliminate rows where the registration_year is out of the 19th century.
 
 
 ```python
@@ -1541,7 +1542,7 @@ autos['registration_year'][autos['registration_year'].between(1960,2016)].descri
 
 
 
-From the exploration of the registration_year column, I decided to use the 1960-2016 as the acceptable values since the numbers jumped drastically from 1960 onwards and it isn't plausible that a car could be registered afte the ad has been created hence the upper bound of 2016. Using the describe() method, it is clear that the median 2003 doesnt change from the original dataset(2004).
+From the exploration of the registration_year column, I decided to use the 1960-2016 as the acceptable values since the numbers jumped drastically from 1960 onwards and it isn't plausible that a car could be registered after the ad has been created hence the upper bound of 2016. Using the describe() method, it is clear that the median 2003 doesnt change from the original dataset(2004).
 This selection changes eliminates 2022 entries.
 
 
@@ -1621,6 +1622,7 @@ autos['registration_year'].value_counts(normalize = True, dropna = False)
 Exploring the remaining values, the distribution is normal, 2000 being the year with bigger number of car registrations.
 
 ### Exploring Price by Brand
+We would like to understand the average price per brand in the the dataset. 
 
 
 ```python
@@ -1696,7 +1698,7 @@ top_20_brands = autos['brand'].value_counts().index[:20]
 ```
 
 The brand column contains 40 unique car brands, with the top brand being Volkswagen. 
-I have chosen to aggregate the brand data basing ton the top 20 car brands as seen using the value_counts() method.
+I have chosen to aggregate the brand data basing on the top 20 car brands as seen using the value_counts() method.
 
 
 ```python
@@ -1772,10 +1774,10 @@ sorted(brand_by_price, key=brand_by_price.get)
 
 
 
-From the analysis it is observed that the sonstige_autos brand has the highest average price, followed by the mini brand, Audi and Mercedes Benz.
-The cheapest brand is renault,  followed by fiat, Opel and Peugeot.
+From the aggregation, it is observed that the sonstige_autos brand has the highest average price, followed by the mini brand, Audi and Mercedes Benz.
+The cheapest brand is Renault, followed by Fiat, Opel and Peugeot.
 
-To understand the avergae mileage fro the top 20 brands, I shall carry out an aggregation like in the average price. Deductions on links between average mileage and average price for those brands can then be made.
+To understand the average mileage for the top 20 brands, I shall carry out an aggregation similar to that done for the average price. Deductions on links between average mileage and average price for those brands can then be made.
 
 
 ```python
@@ -2074,8 +2076,8 @@ bbp_df
 
 
 
-From the dataframe above, it acn be deduced that car brands with less average mileage, end up being the more expensive as comapred to those with more mileage.
-In conclusion, the thi higher the avearage mileage, the less the price.
+From the dataframe above, it can be deduced that car brands with less average mileage, end up being more expensive as compared to those with more mileage.
+In conclusion, for this specific car listing, the the higher the avearage mileage, the less the price.
 
 
 ```python
